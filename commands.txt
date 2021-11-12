@@ -1,0 +1,39 @@
+#Command to create project
+gcloud projects create <project_name>
+
+gcloud projects create siva-nov-2021
+
+#Command to delete project
+gcloud projects delete <project_name>
+
+gcloud projects delete siva-nov-2021
+
+#Command to list projects
+gcloud projects list
+
+#Command to create the service account
+gcloud iam service-accounts create <account_name> --display-name="<display_name>"
+
+gcloud iam service-accounts create siva-sa1 --display-name "siva service account 1"
+
+#Command to delete the service account
+gcloud iam service-accounts delete <email_id>
+
+gcloud iam service-accounts delete siva-sa1@siva-nov-2021.iam.gserviceaccount.com
+
+#Command to list the service accounts
+gcloud iam service-accounts list
+
+#Command to assign the role to service account
+gcloud projects add-iam-policy-binding PROJECT_ID --member=PRINCIPAL --role=ROLE
+
+gcloud projects add-iam-policy-binding siva-nov-2021 \
+  --member "serviceAccount:siva-sa1@siva-nov-2021.iam.gserviceaccount.com" \
+  --role roles/viewer
+
+gcloud projects add-iam-policy-binding siva-nov-2021 \
+  --member "serviceAccount:siva-sa1@siva-nov-2021.iam.gserviceaccount.com" \
+  --role roles/compute.admin
+  
+#Command to list all the roles available
+gcloud iam roles list
