@@ -1,39 +1,91 @@
-#Command to create project
-gcloud projects create <project_name>
+Project on GCP
 
-gcloud projects create siva-nov-2021
+#Command to set the zone
+Syntax :gcloud config set compute/zone <zone_name>
+Example :gcloud config set compute/zone asia-east1-b
+
+#Command to set the region
+Syntax :gcloud config set compute/region <region_name>
+Example :gcloud config set compute/region asia-east1
+
+#Command to create project
+Syntax : gcloud projects create <project_name>
+Example : gcloud projects create my-gcp-world-1
 
 #Command to delete project
-gcloud projects delete <project_name>
+Syntax : gcloud projects delete <project_name>
+Example : gcloud projects delete my-gcp-world-1
 
-gcloud projects delete siva-nov-2021
+#Command to set project
+Syntax : gcloud config set project <project_name>
+Example : gcloud config set project my-gcp-world-1
 
 #Command to list projects
-gcloud projects list
+Syntax : gcloud projects list
+
+Service Accounts
 
 #Command to create the service account
-gcloud iam service-accounts create <account_name> --display-name="<display_name>"
-
-gcloud iam service-accounts create siva-sa1 --display-name "siva service account 1"
+Syntax : gcloud iam service-accounts create <account_name> --display-name="<display_name>"
+Example : gcloud iam service-accounts create my-service-account-1 --display-name "my service account 2"
 
 #Command to delete the service account
-gcloud iam service-accounts delete <email_id>
-
-gcloud iam service-accounts delete siva-sa1@siva-nov-2021.iam.gserviceaccount.com
+Syntax : gcloud iam service-accounts delete <email_id>
+Example : gcloud iam service-accounts delete my-service-account-1@my-gcp-world-1.iam.gserviceaccount.com
 
 #Command to list the service accounts
-gcloud iam service-accounts list
+Syntax : gcloud iam service-accounts list
+
+#Command to disable the service account
+Syntax : gcloud iam service-accounts disable <email_id>
+Example : gcloud iam service-accounts disable my-service-account-1@my-gcp-world-1.iam.gserviceaccount.com
+
+#Command to enable the service account
+Syntax : gcloud iam service-accounts enable <email_id>
+Example : gcloud iam service-accounts enable my-service-account-1@my-gcp-world-1.iam.gserviceaccount.com
 
 #Command to assign the role to service account
-gcloud projects add-iam-policy-binding PROJECT_ID --member=PRINCIPAL --role=ROLE
+Syntax : gcloud projects add-iam-policy-binding PROJECT_ID --member=PRINCIPAL --role=ROLE
+Example : gcloud projects add-iam-policy-binding my-gcp-world-1 --member "serviceAccount:my-service-account-1@my-gcp-world-1.iam.gserviceaccount.com" --role roles/compute.admin, --role roles/storage.admin, --role roles/viewer
 
-gcloud projects add-iam-policy-binding siva-nov-2021 \
-  --member "serviceAccount:siva-sa1@siva-nov-2021.iam.gserviceaccount.com" \
-  --role roles/viewer
+#Command to remove the role to service account
+Syntax : gcloud projects remove-iam-policy-binding PROJECT_ID --member=PRINCIPAL --role=ROLE
+Example : gcloud projects remove-iam-policy-binding my-gcp-world-1 --member "serviceAccount:my-service-account-1@my-gcp-world-1.iam.gserviceaccount.com" --role roles/storage.admin
 
-gcloud projects add-iam-policy-binding siva-nov-2021 \
-  --member "serviceAccount:siva-sa1@siva-nov-2021.iam.gserviceaccount.com" \
-  --role roles/compute.admin
+#Command to create key for service account
+Syntax : gcloud alpha iam service-accounts keys create key.json --iam-account=<email_account>
+Example :gcloud alpha iam service-accounts keys create key.json --iam-account=siva-sa2@siva-13-nov-2021.iam.gserviceaccount.com
   
 #Command to list all the roles available
-gcloud iam roles list
+Syntax :gcloud iam roles list
+
+Cloud Compute Instance
+
+#Command to create the compute instance
+Syntax :gcloud compute instances create <instance_name> --zone=<zone_name> --machine-type=<machine_type>
+Example :gcloud compute instances create my-vm-1 --zone=asia-east1-b --machine-type=n1-standard-1
+
+#Command to delete the compute instance
+Syntax :gcloud compute instances delete <instance_name> --zone=<zone_name>
+Example :gcloud compute instances delete my-vm-1 --zone=asia-east1-b
+
+#Command to start the compute instance
+Syntax :gcloud compute instances start <instance_name>
+Example :gcloud compute instances start my-vm-1
+
+#Command to stop the compute instance
+Syntax :gcloud compute instances stop <instance_name>
+Example :gcloud compute instances stop my-vm-1
+
+#Command to check the list of compute instance
+Syntax : gcloud compute instances list
+
+Cloud Storage Bucket
+
+#Command to create storage bucket
+Syntax :gsutil mb -p <project_name> -c <storage_class> -l <region_name> gs://<bucket_name>
+Example :gsutil mb -p my-gcp-world-1 -c STANDARD -l ASIA-EAST1 gs://my-gcp-bucket
+
+#Command to delete storage bucket
+Syntax :gsutil rm -r gs://<bucket_name>
+Example :gsutil rm -r gs://my-gcp-bucket
